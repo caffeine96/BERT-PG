@@ -10,10 +10,22 @@ def parse_args():
 	"""
 	parser = argparse.ArgumentParser() #Creating a parser object
 	parser.add_argument(
-						"--mode",default="train",
-						choices=("train","predict"),
-						help="Mode in which you want to use the model"
-						)
+		"--mode",
+		default = "train",
+		choices = ("train","predict"),
+		help = "Mode in which you want to use the model"
+		)
+	parser.add_argument(
+		"--max_len_in",
+		default = 50,
+		help = "Maximum length of the input"
+		)
+	parser.add_argument(
+		"--max_len_out",
+		default = 20,
+		help = "Maximum length of the output"
+		)
+
 
 	args = parser.parse_args()  #Parsing arguments
 	
