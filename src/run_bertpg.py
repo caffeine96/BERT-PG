@@ -8,6 +8,7 @@ from bertpg_model import BERTPG
 def main(kwargs):
 	if kwargs["mode"] == "train":
 		model = BERTPG(kwargs)
+		model.train()
 	elif kwargs["mode"] == "predict":
 		model = BERTPG(kwargs)
 
