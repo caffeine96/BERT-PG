@@ -57,8 +57,21 @@ class BERTPG():
 		out = []
 
 		for line in data:
-			inp.append(line.split("\t")[0])
-			out.append(line.split("\t")[1])
+			tokenized_inp = self.bert_tokenizer(line.split("\t")[0])
+			if len(tokenized_inp) > self.max_len_in:
+				tokenized_inp = tokenized_inp[:self.max_len_in]
+			else:
+				tokenized_inp.extend([self.bert_tokenizer.encode("[PAD]")]*(self.max_len_in-len(tokenized_inp)))
+
+			tokenized_out = self.bert_tokenizer(line.split("\t")[1])
+			if len(tokenized_out) > self.max_len_out:
+				tokenized_out = tokenized_out[:self.max_len_out]
+			else:
+				tokenized_out.extend([self.bert_tokenizer.encode("[PAD]")]*(self.max_len_out-len(tokenized_out)))
+
+
+			inp.append(tokenized_inp)
+			out.append(tokenized_out)
 
 		return inp, out
 
